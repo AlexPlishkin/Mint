@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Mint</string>
+    <string name="login_success_text">You has been signed in</string>
+    <string name="login_failed_text">User name or password is incorrect</string>
+</resources>
