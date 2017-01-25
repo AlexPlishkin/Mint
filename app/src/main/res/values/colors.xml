@@ -3,5 +3,6 @@
     <color name="colorPrimary">#3fcc6c</color>
     <color name="colorPrimaryDark">#17933f</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="backgroundLoginButton">#3fcc6c</color>
+    <color name="backgroundSignInButton">#3fcc6c</color>
+    <color name="backgroundSignUpButton">#add9bb</color>
 </resources>

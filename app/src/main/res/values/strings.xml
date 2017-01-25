@@ -2,4 +2,10 @@
     <string name="app_name">Mint</string>
     <string name="login_success_text">You has been signed in</string>
     <string name="login_failed_text">User name or password is incorrect</string>
+    <string name="login">Login</string>
+    <string name="signInButton">Sign In</string>
+    <string name="signUpButton">Sign Up</string>
+    <string name="passwordText">Password</string>
+    <string name="repeatPasswordText">Repeat Password</string>
+    <string name="settingsName">mysettings</string>
 </resources>
