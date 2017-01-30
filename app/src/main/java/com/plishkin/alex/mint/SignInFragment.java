@@ -10,6 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.plishkin.alex.mint.Adapters.MyRecyclerViewAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,7 +23,6 @@ public class SignInFragment extends Fragment {
 
     private RecyclerView myRecyclerView;
     private RecyclerView.Adapter myAdapter;
-    private RecyclerView.LayoutManager myLayoutManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,10 +34,14 @@ public class SignInFragment extends Fragment {
                              Bundle savedInstanceState) {
         //String login = getActivity().getIntent().getStringExtra("login");
 
-        myRecyclerView = (RecyclerView) getActivity().findViewById(R.id.recycle_list);
-        myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));
+        View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
 
-        return inflater.inflate(R.layout.fragment_sign_in, container, false);
+        myRecyclerView = (RecyclerView) view.findViewById(R.id.recycle_list);
+        String[] data = {"1", "2", "3"};
+        myRecyclerView.setAdapter(new MyRecyclerViewAdapter(data));
+        myRecyclerView.setLayoutManager(new LinearLayoutManager(container.getContext()));
+
+        return view;
     }
 
     @Override
