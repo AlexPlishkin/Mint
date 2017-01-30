@@ -8,4 +8,7 @@
     <string name="passwordText">Password</string>
     <string name="repeatPasswordText">Repeat Password</string>
     <string name="settingsName">mysettings</string>
+    <string name="toast_regiter_alerady">You have not been registered already</string>
+    <string name="toast_incorrect_password">Incorrect login or password</string>
+    <string name="search">search</string>
 </resources>

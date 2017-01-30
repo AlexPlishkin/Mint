@@ -3,29 +3,33 @@ package com.plishkin.alex.mint;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.SearchView;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SingInActivity extends AppCompatActivity {
-
-    Intent selfIntent;
-
-    @BindView(R.id.hello_text_view)
-    TextView helloView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
         ButterKnife.bind(this);
-        selfIntent = getIntent();
 
-        if (selfIntent.hasExtra("login")){
-            String login = selfIntent.getStringExtra("login");
-            helloView.setText(helloView.getText().toString() + " " +login);
-        }
+        SignInFragment signInFragment = new SignInFragment();
+        getFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, signInFragment).commit();
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.sign_in_menu, menu);
+        MenuItem menuItem = menu.findItem(R.id.menuSearch);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+
+        return super.onCreateOptionsMenu(menu);
     }
 }
