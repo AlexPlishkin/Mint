@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="backgroundSignInButton">#3fcc6c</color>
     <color name="backgroundSignUpButton">#add9bb</color>
+    <color name="floating_button">#4ddf5e</color>
 </resources>

@@ -1,13 +1,12 @@
 package com.plishkin.alex.mint.Adapters;
 
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-/**
- * Created by sasha on 1/30/17.
- */
+import com.plishkin.alex.mint.Entities.User;
+
+import java.util.ArrayList;
 
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder>{
 
@@ -21,10 +20,10 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         }
     }
 
-    private String[] data;
+    private ArrayList<User> users;
 
-    public MyRecyclerViewAdapter(String[] data) {
-        this.data = data;
+    public MyRecyclerViewAdapter(ArrayList<User> users) {
+        this.users = users;
     }
 
     @Override
@@ -34,12 +33,12 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.textView.setText(data[position]);
+        holder.textView.setText(users.get(position).getFirstName());
     }
 
     @Override
     public int getItemCount() {
-        return data.length;
+        return users.size();
     }
 
 }
