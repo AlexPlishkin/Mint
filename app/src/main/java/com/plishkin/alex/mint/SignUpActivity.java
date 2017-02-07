@@ -19,8 +19,6 @@ public class SignUpActivity extends AppCompatActivity {
 
     Intent selfIntent;
 
-    SharedPreferences mySettings;
-
     @BindView(R.id.sign_up_login)
     TextView signUpLogin;
 
@@ -30,18 +28,20 @@ public class SignUpActivity extends AppCompatActivity {
     @BindView(R.id.sign_up_repeat_password)
     TextView repeatPassword;
 
+    MyApplication application;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
         this.selfIntent = getIntent();
-        mySettings = getSharedPreferences(getString(R.string.settingsName), MODE_PRIVATE);
+        application = (MyApplication) getApplicationContext();
     }
 
     @OnClick(R.id.sign_up_send)
     public void sign_up_send(View view){
-        if (mySettings.contains(signUpLogin.getText().toString())){
+        if (application.getSharedPreferences().contains(signUpLogin.getText().toString())){
             Toast.makeText(this, "Login already exists", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -52,7 +52,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         String hashedPassword = Hasher.md5(signUpPassword.getText().toString());
-        SharedPreferences.Editor editor = mySettings.edit();
+        SharedPreferences.Editor editor = application.getSharedPreferences().edit();
         editor.putString(signUpLogin.getText().toString(), hashedPassword);
         editor.apply();
 

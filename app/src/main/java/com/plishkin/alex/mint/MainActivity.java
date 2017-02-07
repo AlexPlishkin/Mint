@@ -1,22 +1,24 @@
 package com.plishkin.alex.mint;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.plishkin.alex.mint.Helpers.Hasher;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * TODO: Implements operation : Add, Edit, Delete, Search
+ * TODO: Implements operation : Search
  * TODO: Create new database
  * TODO: SqliteOpenHelper
  * TODO: SqliteAssetsHelper
+ * TODO: Realm
+ * TODO: ORM Lite
  */
 
 public class MainActivity extends AppCompatActivity {
@@ -27,22 +29,22 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.password)
     TextView password;
 
-    SharedPreferences mySettings;
+    MyApplication application;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        mySettings = getSharedPreferences(getString(R.string.settingsName), MODE_PRIVATE);
+        application = (MyApplication) getApplicationContext();
     }
 
     @OnClick(R.id.button_sign_in)
     public void signIn(View view){
         String Login = login.getText().toString();
-        String passwordValue = mySettings.getString(Login, "");
+        String passwordValue = application.getSharedPreferences().getString(Login, "");
 
-        if (!mySettings.contains(Login) || passwordValue.equals("")){
+        if (!application.getSharedPreferences().contains(Login) || passwordValue.equals("")){
             Toast.makeText(this, R.string.toast_regiter_alerady, Toast.LENGTH_SHORT).show();
             return;
         }

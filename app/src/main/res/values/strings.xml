@@ -11,4 +11,8 @@
     <string name="toast_regiter_alerady">You have not been registered already</string>
     <string name="toast_incorrect_password">Incorrect login or password</string>
     <string name="search">search</string>
+    <string name="enter_new_fruit_name">Enter new fruit name</string>
+    <string name="add_newFruit_text_button">Add</string>
+    <string name="enter_fruit_name">Enter fruit name</string>
+    <string name="edit_fruit_text_button">Edit</string>
 </resources>
