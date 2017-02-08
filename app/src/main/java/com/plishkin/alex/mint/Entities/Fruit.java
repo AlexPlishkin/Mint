@@ -1,9 +1,17 @@
 package com.plishkin.alex.mint.Entities;
 
 import com.google.gson.Gson;
+import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
+@DatabaseTable(tableName = "fruits")
 public class Fruit {
 
+    @DatabaseField(generatedId = true)
+    private int id;
+
+    @DatabaseField(columnName = "name", dataType = DataType.STRING, canBeNull = false)
     private String name;
 
     public Fruit() {
@@ -22,14 +30,7 @@ public class Fruit {
         return this;
     }
 
-    public String toJSON(){
-        Gson gson = new Gson();
-        return gson.toJson(this);
+    public int getId() {
+        return id;
     }
-
-    public static Fruit fromJson(String json){
-        Gson gson = new Gson();
-        return gson.fromJson(json, Fruit.class);
-    }
-
 }

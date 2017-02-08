@@ -1,5 +1,6 @@
 package com.plishkin.alex.mint;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,7 +8,13 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.plishkin.alex.mint.Db.DatabaseHelper;
+import com.plishkin.alex.mint.Db.FruitDAO;
+import com.plishkin.alex.mint.Db.HelperFactory;
 import com.plishkin.alex.mint.Helpers.Hasher;
+
+import java.sql.SQLException;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

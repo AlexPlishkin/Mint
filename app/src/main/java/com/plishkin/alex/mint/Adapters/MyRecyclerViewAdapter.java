@@ -12,9 +12,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.plishkin.alex.mint.Db.FruitDAO;
+import com.plishkin.alex.mint.Db.HelperFactory;
 import com.plishkin.alex.mint.Entities.Fruit;
 import com.plishkin.alex.mint.R;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -63,10 +66,25 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Fruit fruit = currentList.get(holder.getAdapterPosition());
+                if (baseList.contains(fruit)){
+                    baseList.remove(baseList.indexOf(fruit));
+                }
                 currentList.remove(holder.getAdapterPosition());
+
+                if (fruit.getId() != 0){
+                    try {
+                        FruitDAO fruitDAO = HelperFactory.getHelper().getFruitDAO();
+                        fruitDAO.delete(fruit);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+
                 MyRecyclerViewAdapter.this.notifyItemRemoved(holder.getAdapterPosition());
             }
         });
+
         //Edit item
         LayoutInflater layoutInflater = LayoutInflater.from(holder.context);
         final View editView = layoutInflater.inflate(R.layout.edit_fruit, null);
@@ -91,6 +109,20 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         editButtonFruitDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Fruit fruit = currentList.get(holder.getAdapterPosition());
+                fruit.setName(fruitName.getText().toString());
+
+                if (baseList.contains(fruit)){
+                    baseList.get(baseList.indexOf(fruit)).setName(fruitName.getText().toString());
+                }
+
+                try {
+                    FruitDAO fruitDAO = HelperFactory.getHelper().getFruitDAO();
+                    fruitDAO.update(fruit);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
                 currentList.get(holder.getAdapterPosition()).setName(fruitName.getText().toString());
                 MyRecyclerViewAdapter.this.notifyItemChanged(holder.getAdapterPosition());
                 dialog.cancel();
@@ -107,14 +139,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         currentList.add(fruit);
         baseList.add(fruit);
         this.notifyDataSetChanged();
-    }
-
-    public ArrayList<Fruit> getCurrentList() {
-        return currentList;
-    }
-
-    public void setCurrentList(ArrayList<Fruit> currentList) {
-        this.currentList = currentList;
     }
 
     public void filter(String sequence){
