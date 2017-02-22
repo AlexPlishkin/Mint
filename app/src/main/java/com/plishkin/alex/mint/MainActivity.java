@@ -19,14 +19,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-/**
- * TODO: Implements operation : Search
- * TODO: Create new database
- * TODO: SqliteOpenHelper
- * TODO: SqliteAssetsHelper
- * TODO: Realm
- * TODO: ORM Lite
- */
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         application = (MyApplication) getApplicationContext();
+        
     }
 
     @OnClick(R.id.button_sign_in)
