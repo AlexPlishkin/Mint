@@ -4,10 +4,15 @@ import android.app.Application;
 import android.content.SharedPreferences;
 
 import com.plishkin.alex.mint.Db.HelperFactory;
+import com.plishkin.alex.mint.Entities.Contact;
+
+import java.util.List;
 
 public class MyApplication extends Application {
 
     private SharedPreferences sharedPreferences;
+
+    private List<Contact> contactList;
 
     @Override
     public void onCreate() {
@@ -26,4 +31,11 @@ public class MyApplication extends Application {
         return sharedPreferences;
     }
 
+    public List<Contact> getContactList() {
+        return contactList;
+    }
+
+    public void setContactList(List<Contact> contactList) {
+        this.contactList = contactList;
+    }
 }

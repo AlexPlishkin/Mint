@@ -28,12 +28,15 @@ public class ContactsFragment extends Fragment implements AsyncResponseble {
 
     }
 
+    MyApplication application;
+
     @BindView(R.id.contact_recycler_view)
     public RecyclerView contactRecyclerView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        application = (MyApplication) getActivity().getApplicationContext();
     }
 
     @Override
@@ -42,10 +45,8 @@ public class ContactsFragment extends Fragment implements AsyncResponseble {
 
         View view = inflater.inflate(R.layout.fragment_contacts, container, false);
         ButterKnife.bind(this, view);
-
-
+        initRecyclerList();
         return view;
-
     }
 
     @OnClick(R.id.load_contacts_button)
@@ -61,11 +62,18 @@ public class ContactsFragment extends Fragment implements AsyncResponseble {
 
     }
 
+    private void initRecyclerList(){
+        if (application.getContactList() != null){
+            ContactsRecyclerViewAdaper adaper = new ContactsRecyclerViewAdaper((ArrayList<Contact>) application.getContactList());
+            contactRecyclerView.setAdapter(adaper);
+            contactRecyclerView.setLayoutManager(new LinearLayoutManager(ContactsFragment.this.getActivity().getBaseContext()));
+        }
+    }
+
     @Override
     public void getResponse(Object response) {
         List<Contact> contacts = (List<Contact>) response;
-        ContactsRecyclerViewAdaper adaper = new ContactsRecyclerViewAdaper((ArrayList<Contact>) contacts);
-        contactRecyclerView.setAdapter(adaper);
-        contactRecyclerView.setLayoutManager(new LinearLayoutManager(ContactsFragment.this.getActivity().getBaseContext()));
+        application.setContactList(contacts);
+        initRecyclerList();
     }
 }

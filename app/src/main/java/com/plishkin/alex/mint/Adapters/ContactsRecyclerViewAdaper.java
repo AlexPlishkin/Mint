@@ -1,8 +1,11 @@
 package com.plishkin.alex.mint.Adapters;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +21,7 @@ import java.util.ArrayList;
 
 public class ContactsRecyclerViewAdaper extends RecyclerView.Adapter<ContactsRecyclerViewAdaper.ContactHolder> {
 
-    public static class ContactHolder extends RecyclerView.ViewHolder{
+    public static class ContactHolder extends RecyclerView.ViewHolder {
 
         public TextView contact_name;
 
@@ -34,7 +37,7 @@ public class ContactsRecyclerViewAdaper extends RecyclerView.Adapter<ContactsRec
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+phone.getText()));
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone.getText()));
                     v.getContext().startActivity(intent);
                 }
             });
@@ -66,7 +69,6 @@ public class ContactsRecyclerViewAdaper extends RecyclerView.Adapter<ContactsRec
     public int getItemCount() {
         return currentList.size();
     }
-
 
 
 }
