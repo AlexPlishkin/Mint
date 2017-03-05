@@ -2,6 +2,9 @@ package com.plishkin.alex.mint;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.os.Build;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +15,7 @@ import com.plishkin.alex.mint.Db.DatabaseHelper;
 import com.plishkin.alex.mint.Db.FruitDAO;
 import com.plishkin.alex.mint.Db.HelperFactory;
 import com.plishkin.alex.mint.Helpers.Hasher;
+import com.plishkin.alex.mint.Helpers.UserSession;
 
 import java.sql.SQLException;
 
@@ -29,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     TextView password;
 
     MyApplication application;
+    UserSession userSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +41,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         application = (MyApplication) getApplicationContext();
-        
+        userSession = new UserSession(application);
+        if (userSession.userSignedIn()){
+            Intent signInIntent = new Intent(MainActivity.this, SingInActivity.class);
+            signInIntent.putExtra("login", login.getText().toString());
+            startActivity(signInIntent);
+        }
     }
 
     @OnClick(R.id.button_sign_in)
@@ -55,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Intent signInIntent = new Intent(MainActivity.this, SingInActivity.class);
+        userSession.createNewSession();
         signInIntent.putExtra("login", login.getText().toString());
         startActivity(signInIntent);
 

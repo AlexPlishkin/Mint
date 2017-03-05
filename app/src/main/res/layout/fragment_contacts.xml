@@ -4,10 +4,25 @@
     android:layout_height="match_parent"
     tools:context="com.plishkin.alex.mint.ContactsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Contacts" />
+        android:weightSum="1">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.99"
+            android:id="@+id/contact_recycler_view"/>
+
+        <Button
+            android:text="Load contacts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/load_contacts_button"
+            android:background="@color/backgroundSignInButton"/>
+
+    </LinearLayout>
 
 </FrameLayout>

@@ -6,6 +6,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,6 +15,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.plishkin.alex.mint.Adapters.MyRecyclerViewAdapter;
+import com.plishkin.alex.mint.Helpers.UserSession;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,7 +23,7 @@ import butterknife.ButterKnife;
 public class SingInActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
-    public MyRecyclerViewAdapter adapter;
+    public RecyclerView.Adapter<? extends RecyclerView.ViewHolder> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +80,9 @@ public class SingInActivity extends AppCompatActivity
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapter.filter(newText);
+                if (adapter instanceof MyRecyclerViewAdapter)
+                    ((MyRecyclerViewAdapter) adapter).filter(newText);
+
                 return false;
             }
         });
@@ -116,6 +120,7 @@ public class SingInActivity extends AppCompatActivity
                 break;
             }
             case R.id.nav_log_out:{
+                (new UserSession((MyApplication) getApplicationContext())).sessionDestroy();
                 finish();
             }
         }

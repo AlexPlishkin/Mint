@@ -148,7 +148,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             for (Fruit fruit : baseList){
                 currentList.add(fruit);
             }
-            System.out.println(currentList.toString());
         }else{
             String pattern = sequence.toLowerCase();
 
