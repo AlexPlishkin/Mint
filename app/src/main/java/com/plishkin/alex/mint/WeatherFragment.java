@@ -1,16 +1,19 @@
 package com.plishkin.alex.mint;
 
-import android.content.Context;
-import android.net.Uri;
+
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.plishkin.alex.mint.Tasks.AsyncResponseble;
+import com.plishkin.alex.mint.Tasks.LoadWeatherTask;
+
+import butterknife.ButterKnife;
 
 
-public class WeatherFragment extends Fragment {
+public class WeatherFragment extends Fragment implements AsyncResponseble {
 
     public WeatherFragment() {
 
@@ -25,8 +28,17 @@ public class WeatherFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_weather, container, false);
+        View view = inflater.inflate(R.layout.fragment_weather, container, false);
+        ButterKnife.bind(view);
+
+        LoadWeatherTask weatherTask = new LoadWeatherTask(view.getContext(), this);
+        weatherTask.execute();
+
+        return view;
     }
 
+    @Override
+    public void getResponse(Object response) {
+
+    }
 }
