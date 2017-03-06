@@ -5,9 +5,10 @@
     tools:context="com.plishkin.alex.mint.WeatherFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Weather" />
+    <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/load_weather_button" />
 
 </FrameLayout>
