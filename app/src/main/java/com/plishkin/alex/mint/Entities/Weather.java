@@ -14,6 +14,22 @@ public class Weather {
     @Expose
     private Current current;
 
+    @SerializedName("feelslike_c")
+    @Expose
+    private double feelsLike;
+
+    public double getFeelsLike() {
+        return feelsLike;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public Current getCurrent() {
+        return current;
+    }
+
 
     public static class Location{
 
@@ -21,13 +37,19 @@ public class Weather {
         @Expose
         private String name;
 
-        @SerializedName("region")
+        @SerializedName("localtime")
         @Expose
-        private String region;
+        private String dateTime;
 
-        @SerializedName("country")
-        @Expose
-        private String country;
+        public String getDateTime() {
+            return dateTime;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+
     }
 
     public static class Current{
@@ -36,19 +58,35 @@ public class Weather {
         @Expose
         private double tempC;
 
-        @SerializedName("wind_kph")
-        @Expose
-        private double windSpeed;
 
         @SerializedName("condition")
         @Expose
         private Condition condition;
 
+        public double getTempC() {
+            return tempC;
+        }
+
+        public Condition getCondition() {
+            return condition;
+        }
 
         public static class Condition{
             @SerializedName("text")
             @Expose
             private String text;
+
+            @SerializedName("icon")
+            @Expose
+            private String imageUrl;
+
+            public String getImageUrl() {
+                return imageUrl;
+            }
+
+            public String getText() {
+                return text;
+            }
 
         }
     }

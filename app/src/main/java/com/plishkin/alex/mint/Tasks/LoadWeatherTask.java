@@ -22,13 +22,12 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class LoadWeatherTask extends AsyncTask<Void, Integer, Weather> {
 
     private volatile Context context = null;
-    private WeatherAPI weatherAPI;
     private ProgressDialog dialog;
     private AsyncResponseble delegate = null;
-    private Retrofit retrofit;
+    private Weather weather = null;
 
-    final String REQUEST_KEY = "b4353860f359482a9d7100649170603";
-    final String REQUEST_CITY = "Chernivtsi";
+    private final String REQUEST_KEY = "b4353860f359482a9d7100649170603";
+    private final String REQUEST_CITY = "Chernivtsi";
 
     public LoadWeatherTask(Context context, AsyncResponseble asyncResponseble) {
         this.context = context;
@@ -44,37 +43,29 @@ public class LoadWeatherTask extends AsyncTask<Void, Integer, Weather> {
     @Override
     protected synchronized Weather doInBackground(Void... params) {
 
-        retrofit = new Retrofit.Builder()
+        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://api.apixu.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        weatherAPI = retrofit.create(WeatherAPI.class);
+        WeatherAPI weatherAPI = retrofit.create(WeatherAPI.class);
 
 
         Call<Weather> bodyCall = weatherAPI.loadWeather(REQUEST_KEY, REQUEST_CITY);
-        final Weather[] weather = new Weather[1];
 
-        bodyCall.enqueue(new Callback<Weather>() {
-            @Override
-            public void onResponse(Call<Weather> call, Response<Weather> response) {
-                weather[0] = response.body();
-            }
+        try {
+            weather = bodyCall.execute().body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-            @Override
-            public void onFailure(Call<Weather> call, Throwable t) {
-
-            }
-        });
-
-        System.out.println(weather[0]);
-        return weather[0];
+        return weather;
     }
 
     @Override
     protected void onPostExecute(Weather weather) {
-        super.onPostExecute(weather);
         dialog.dismiss();
         delegate.getResponse(weather);
+        super.onPostExecute(weather);
     }
 }

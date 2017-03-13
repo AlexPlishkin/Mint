@@ -1,14 +1,145 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.plishkin.alex.mint.WeatherFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/load_weather_button" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            app:srcCompat="@android:color/transparent"
+            android:id="@+id/weather_image"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingBottom="20dp">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <TextView
+                    android:text="Condition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView18"
+                    android:textSize="12sp"
+                    android:paddingRight="10dp" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/weather_condition_text"
+                    android:textSize="12sp"
+                    android:paddingLeft="30dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:text="City"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView10"
+                    android:textSize="12sp"
+                    android:paddingRight="10dp" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/weather_city_text_view"
+                    android:textSize="12sp"
+                    android:paddingLeft="30dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:text="Date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView12"
+                    android:textSize="12sp"
+                    android:paddingRight="10dp" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/date_weather_text_view"
+                    android:textSize="12sp"
+                    android:paddingLeft="30dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:text="Temperature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView14"
+                    android:textSize="12sp"
+                    android:paddingRight="10dp" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/temperature_weather_text_view"
+                    android:textSize="12sp"
+                    android:paddingLeft="30dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:text="Feels like"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView16"
+                    android:textSize="12sp"
+                    android:paddingRight="10dp" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/feelslike_weather_text_view"
+                    android:textSize="12sp"
+                    android:paddingLeft="30dp" />
+            </TableRow>
+        </TableLayout>
+
+        <Button
+            android:text="Load weather"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/load_weather_button"
+            android:layout_weight="1"
+            android:background="@color/backgroundSignInButton"/>
+    </LinearLayout>
 
 </FrameLayout>
